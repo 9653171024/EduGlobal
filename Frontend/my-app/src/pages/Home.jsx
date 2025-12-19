@@ -27,7 +27,7 @@ const Home = () => {
               <button className="search-btn">Explore</button>
             </div>
 
-            {/* REMOVED: The Stats Section (10k+, 500+, 100%) */}
+            
             
           </div>
 
