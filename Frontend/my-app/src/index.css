@@ -332,6 +332,33 @@ a { text-decoration: none; color: inherit; }
   background-color: var(--primary-dark);
 }
 
+.onboarding-btn {
+  padding: 1.2rem;
+  border: 2px solid #e2e8f0;
+  background: white;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.onboarding-btn:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+  transform: translateY(-2px);
+  color: #2563eb;
+}
+
+.animation-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
 /* Responsive Logic */
 @media (max-width: 768px) {
   .hero-content { flex-direction: column; text-align: center; }

@@ -61,7 +61,53 @@ app.post('/api/users/register', async (req, res) => {
   }
 });
 
-// --- 4. START SERVER ---
+// --Login--
+
+// --- LOGIN ROUTE (Safe Version) ---
+app.post('/api/users/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // 1. Basic Validation: Did the frontend send empty data?
+    if (!email || !password) {
+      return res.status(400).json({ message: "Please provide both email and password" });
+    }
+
+    const usersCollection = db.collection('users');
+    const user = await usersCollection.findOne({ email });
+
+    // 2. Check if user exists
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+
+    // 3. Safe Password Comparison
+    // We ensure both sides are strings before trimming to prevent crashes
+    const dbPassword = String(user.password).trim();
+    const inputPassword = String(password).trim();
+
+    if (dbPassword === inputPassword) {
+      res.json({
+        message: "Login Successful",
+        user: { 
+          _id: user._id, 
+          name: user.name, 
+          email: user.email,
+          visaStatus: user.visaStatus || "In Progress", 
+          loanStatus: user.loanStatus || "Reviewing"
+        }
+      });
+    } else {
+      res.status(401).json({ message: "Invalid Password" });
+    }
+
+  } catch (error) {
+    console.error("Login Route Crashed:", error); // Shows the specific error in terminal
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
+// --- . START SERVER ---
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);

@@ -1,15 +1,13 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
-// 1. Import Toastify and its CSS
+// ✅ FIXED IMPORT: Added 'Link' here
+import { useNavigate, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const navigate = useNavigate();
 
-  // Refs to jump to missing fields
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -34,128 +32,98 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // --- VALIDATION WITH TOASTS & FOCUS ---
+    if (!formData.name) { toast.error("Please enter Name"); nameRef.current.focus(); return; }
+    if (!formData.email) { toast.error("Please enter Email"); emailRef.current.focus(); return; }
+    if (!formData.password) { toast.error("Please enter Password"); passwordRef.current.focus(); return; }
+    if (!formData.age) { toast.error("Please enter Age"); ageRef.current.focus(); return; }
+    if (!formData.specialization) { toast.error("Specialization is required"); specializationRef.current.focus(); return; }
 
-    if (!formData.name) {
-      toast.error("Please enter your Full Name", { position: "top-right" });
-      nameRef.current.focus();
-      return;
-    }
-
-    if (!formData.email) {
-      toast.error("Email Address is missing!", { position: "top-right" });
-      emailRef.current.focus();
-      return;
-    }
-
-    // Check Password Complexity
-    const password = formData.password;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    const isValidLength = password.length >= 8 && password.length <= 11;
-
-    if (!isValidLength || !hasUpperCase || !hasLowerCase || !hasSpecialChar) {
-      toast.error("Password must be 8-11 chars, with Upper, Lower & Special char (@$!%)", { 
-        position: "top-right",
-        autoClose: 5000 
-      });
-      passwordRef.current.focus();
-      return;
-    }
-
-    if (!formData.age) {
-      toast.error("Please tell us your Age", { position: "top-right" });
-      ageRef.current.focus();
-      return;
-    }
-
-    if (!formData.specialization) {
-      toast.error("Specialization is needed for matching", { position: "top-right" });
-      specializationRef.current.focus();
-      return;
-    }
-
-    // --- SEND DATA TO BACKEND ---
     try {
-      // Show loading toast
-      const loadingToast = toast.loading("Creating your profile...");
+      const loadingToast = toast.loading("Creating your account...");
+      
+      const res = await axios.post('http://127.0.0.1:5000/api/users/register', formData);
 
-      await axios.post('http://localhost:5000/api/users/register', formData);
-
-      // Update loading toast to success
       toast.update(loadingToast, {
-        render: "Profile Created Successfully! 🎉",
+        render: "Account Created! Starting Onboarding...",
         type: "success",
         isLoading: false,
-        autoClose: 2000
+        autoClose: 1500
       });
 
-      // Redirect after 2 seconds
-      setTimeout(() => navigate('/'), 2000);
+      const userToSave = {
+        _id: res.data.userId,
+        name: formData.name,
+        email: formData.email,
+        visaStatus: "Not Started",
+        loanStatus: "Not Started"
+      };
+      localStorage.setItem('userInfo', JSON.stringify(userToSave));
+
+      setTimeout(() => navigate('/onboarding'), 1500);
 
     } catch (err) {
-      toast.dismiss(); // Remove loading toast
-      const errorMsg = err.response?.data?.message || "Something went wrong";
-      toast.error(`Error: ${errorMsg}`, { position: "top-center" });
+      toast.dismiss();
+      const errorMsg = err.response?.data?.message || "Server Error";
+      toast.error(errorMsg);
     }
   };
 
   return (
     <div className="auth-container">
-      {/* 2. Add the Container (Crucial for Toasts to show up) */}
-      <ToastContainer autoClose={3000} />
-
+      <ToastContainer position="top-center" autoClose={3000} />
+      
       <div className="auth-card">
-        <h2 style={{ marginBottom: '20px' }}>Create Profile</h2>
+        <div className="auth-header">
+          <h2>Student Registration</h2>
+          <p style={{ color: '#64748b', marginBottom: '20px' }}>Join us to find your dream university.</p>
+        </div>
         
         <form onSubmit={handleSubmit} noValidate>
           
           <div className="input-group">
             <label>Full Name</label>
-            <input type="text" name="name" ref={nameRef} onChange={handleChange} />
+            <input type="text" name="name" ref={nameRef} onChange={handleChange} placeholder="e.g. Rahul Sharma" />
           </div>
 
           <div className="input-group">
             <label>Email Address</label>
-            <input type="email" name="email" ref={emailRef} onChange={handleChange} />
+            <input type="email" name="email" ref={emailRef} onChange={handleChange} placeholder="student@example.com" />
           </div>
 
           <div className="input-group">
             <label>Password</label>
-            <input type="password" name="password" ref={passwordRef} onChange={handleChange} />
+            <input type="password" name="password" ref={passwordRef} onChange={handleChange} placeholder="********" />
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+            <div className="input-group">
+              <label>Age</label>
+              <input type="number" name="age" ref={ageRef} onChange={handleChange} placeholder="22" />
+            </div>
+            <div className="input-group">
+              <label>Current Level</label>
+              <select name="currentEducation" onChange={handleChange}>
+                <option>Bachelors</option>
+                <option>Masters</option>
+                <option>High School</option>
+              </select>
+            </div>
           </div>
 
           <div className="input-group">
-            <label>Age</label>
-            <input type="number" name="age" ref={ageRef} onChange={handleChange} />
-          </div>
-
-          <div className="input-group">
-            <label>Current Level</label>
-            <select name="currentEducation" onChange={handleChange}>
-              <option>Bachelors</option>
-              <option>Masters</option>
-              <option>High School</option>
-            </select>
-          </div>
-
-          <div className="input-group">
-            <label>Specialization</label>
+            <label>Specialization / Major</label>
             <input type="text" name="specialization" ref={specializationRef} onChange={handleChange} placeholder="e.g. Computer Science" />
           </div>
 
-          <div className="input-group">
-            <label>Target Course (Optional)</label>
-            <input type="text" name="targetCourse" onChange={handleChange} />
-          </div>
+          <button type="submit" className="submit-btn-primary">Create Account & Start</button>
 
-          <div className="input-group">
-            <label>Resume Link (Optional)</label>
-            <input type="text" name="resumeLink" onChange={handleChange} />
-          </div>
-
-          <button type="submit" className="submit-btn-primary">Create Account</button>
+          {/* Login Link */}
+          <p style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.95rem', color: '#64748b' }}>
+            Already have an account?{' '}
+            <Link to="/Login" style={{ color: '#2563eb', fontWeight: '600', textDecoration: 'none' }}>
+              Login here
+            </Link>
+          </p>
 
         </form>
       </div>
