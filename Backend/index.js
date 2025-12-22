@@ -141,5 +141,5 @@ app.post('/api/colleges/recommend', async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
-const PORT = 5000;
+const PORT = 5001;
 app.listen(PORT, () => console.log(`🚀 Server running on ${PORT}`));

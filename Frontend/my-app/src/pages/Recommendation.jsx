@@ -15,7 +15,7 @@ const Recommendations = () => {
       try {
         // 2. Send choices to Backend
         // Use 127.0.0.1 to avoid Windows localhost issues
-        const res = await axios.post('http://127.0.0.1:5000/api/colleges/recommend', prefs || {});
+        const res = await axios.post('http://127.0.0.1:5001/api/colleges/recommend', prefs || {});
         
         setColleges(res.data.data);
         setRate(res.data.meta.liveRate);
