@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Login from "./pages/login";
 import Onboarding from "./pages/Onboarding";
 import './pages/Onboarding.css';
+import Recommendations from "./pages/Recommendation";
 
 
 function App(){
@@ -18,7 +19,7 @@ function App(){
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/Onboarding" element={<Onboarding/>}></Route>
-        <Route path="/Recommendation" element={<Recommendation/>}></Route>
+        <Route path="/Recommendation" element={<Recommendations/>}></Route>
       </Routes>
     </Router>
   </>);
