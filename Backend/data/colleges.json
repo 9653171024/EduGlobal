@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Massachusetts Institute of Technology (MIT)",
+    "country": "Abroad",
+    "type": "Private",
+    "specialization": "CS",
+    "ranking": 1,
+    "feesUSD": 58000,
+    "deadline": "2025-01-05",
+    "image": "/images/mit.jpg"
+  },
+  {
+    "name": "Stanford University",
+    "country": "Abroad",
+    "type": "Private",
+    "specialization": "CS",
+    "ranking": 2,
+    "feesUSD": 60000,
+    "deadline": "2025-04-15",
+    "image": "/images/standford.jpg"
+  },
+  {
+    "name": "IIT Bombay",
+    "country": "India",
+    "type": "Govt",
+    "specialization": "CS",
+    "ranking": 15,
+    "feesUSD": 3500,
+    "deadline": "2025-06-30",
+    "image": "/images/iit.jpg"
+  },
+  {
+    "name": "Harvard Medical School",
+    "country": "Abroad",
+    "type": "Private",
+    "specialization": "Medical",
+    "ranking": 1,
+    "feesUSD": 65000,
+    "deadline": "2025-02-10",
+    "image": "/images/harvard.jpg"
+  },
+  {
+    "name": "AIIMS Delhi",
+    "country": "India",
+    "type": "Govt",
+    "specialization": "Medical",
+    "ranking": 1,
+    "feesUSD": 100,
+    "deadline": "2025-05-01",
+    "image": "/images/aiims.jpg"
+  },
+  {
+    "name": "London Business School",
+    "country": "Abroad",
+    "type": "Private",
+    "specialization": "MBA",
+    "ranking": 5,
+    "feesUSD": 70000,
+    "deadline": "2025-03-20",
+    "image": "/images/london.jpg"
+  },
+  {
+    "name": "IIM Ahmedabad",
+    "country": "India",
+    "type": "Govt",
+    "specialization": "MBA",
+    "ranking": 40,
+    "feesUSD": 30000,
+    "deadline": "2025-01-15",
+    "image": "/images/iima.jpg"
+  },
+  {
+    "name": "University of Oxford",
+    "country": "Abroad",
+    "type": "Govt",
+    "specialization": "Arts",
+    "ranking": 3,
+    "feesUSD": 45000,
+    "deadline": "2025-10-15",
+    "image": "/images/oxford.jpg"
+  }
+]

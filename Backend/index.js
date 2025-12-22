@@ -1,114 +1,145 @@
-// backend/server.js
 const express = require('express');
 const cors = require('cors');
 const { MongoClient } = require('mongodb');
+const axios = require('axios'); // Ensure this is correct
+const path = require('path');
+
+// Load College Data Safely
+let college_list = [];
+try {
+  college_list = require('./data/colleges.json');
+} catch (e) {
+  console.error("⚠️ Could not load colleges.json. Check file path!");
+  college_list = []; // Fallback empty array
+}
 
 const app = express();
-
-// --- 1. MIDDLEWARE ---
 app.use(express.json());
 app.use(cors());
 
-// --- 2. DATABASE CONFIGURATION ---
-// I added "HigherEdPlatform" after .net/ so your data goes to the right place
+
+// --- DATABASE CONFIGURATION ---
 const MONGO_URI = "mongodb+srv://Sakshi:I1lmFpFhjL46Rs8D@cluster0.rqun4c6.mongodb.net/HigherEdPlatform?retryWrites=true&w=majority&appName=Cluster0";
 const DB_NAME = 'HigherEdPlatform';
 
 let db;
-
 async function connectDB() {
   try {
     const client = new MongoClient(MONGO_URI);
     await client.connect();
     db = client.db(DB_NAME);
-    console.log("✅ Connected to MongoDB via MongoClient");
-  } catch (error) {
-    console.error("❌ MongoDB Connection Error:", error);
-    process.exit(1);
+    console.log("✅ MongoDB Connected");
+  } catch (err) {
+    console.log("❌ DB Error:", err.message);
   }
 }
-
 connectDB();
 
+// --Logic Route
 // --- 3. API ROUTE (Register Student) ---
 app.post('/api/users/register', async (req, res) => {
   try {
     const userData = req.body;
-
-    // Basic Validation
     if (!userData.email || !userData.name) {
       return res.status(400).json({ message: "Missing required fields" });
     }
-
     const usersCollection = db.collection('users');
-
-    // Check if user exists
     const existingUser = await usersCollection.findOne({ email: userData.email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
-
-    // Insert User
     const newUser = { ...userData, createdAt: new Date() };
     const result = await usersCollection.insertOne(newUser);
-
-    console.log("User Saved:", result.insertedId);
     res.status(201).json({ message: "Student Profile Created Successfully!", userId: result.insertedId });
-
   } catch (error) {
-    console.error("Error in Register Route:", error);
     res.status(500).json({ message: "Server Error" });
   }
 });
 
-// --Login--
-
-// --- LOGIN ROUTE (Safe Version) ---
+// --- 4. LOGIN ROUTE ---
 app.post('/api/users/login', async (req, res) => {
   try {
     const { email, password } = req.body;
+    if (!email || !password) return res.status(400).json({ message: "Please provide both" });
 
-    // 1. Basic Validation: Did the frontend send empty data?
-    if (!email || !password) {
-      return res.status(400).json({ message: "Please provide both email and password" });
-    }
+    const user = await db.collection('users').findOne({ email });
+    if (!user) return res.status(401).json({ message: "User not found" });
 
-    const usersCollection = db.collection('users');
-    const user = await usersCollection.findOne({ email });
-
-    // 2. Check if user exists
-    if (!user) {
-      return res.status(401).json({ message: "User not found" });
-    }
-
-    // 3. Safe Password Comparison
-    // We ensure both sides are strings before trimming to prevent crashes
-    const dbPassword = String(user.password).trim();
-    const inputPassword = String(password).trim();
-
-    if (dbPassword === inputPassword) {
+    if (String(user.password).trim() === String(password).trim()) {
       res.json({
         message: "Login Successful",
-        user: { 
-          _id: user._id, 
-          name: user.name, 
-          email: user.email,
-          visaStatus: user.visaStatus || "In Progress", 
-          loanStatus: user.loanStatus || "Reviewing"
-        }
+        user: { _id: user._id, name: user.name, email: user.email }
       });
     } else {
       res.status(401).json({ message: "Invalid Password" });
     }
-
   } catch (error) {
-    console.error("Login Route Crashed:", error); // Shows the specific error in terminal
     res.status(500).json({ message: "Server Error" });
   }
 });
 
-// --- . START SERVER ---
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+// --- RECOMMENDATION ROUTE (The Fix) ---
+// --- RECOMMENDATION ROUTE (DEBUG VERSION) ---
+app.post('/api/colleges/recommend', async (req, res) => {
+  try {
+    const { country, type, specialization } = req.body || {};
+
+    // 🛑 DEBUG LOG 1: Print what the backend received
+    console.log("------------------------------------------------");
+    console.log("🔍 REQUEST RECEIVED:");
+    console.log("Country:", country);
+    console.log("Type:", type);
+    console.log("Specialization:", specialization);
+    console.log("------------------------------------------------");
+
+    let result = college_list;
+
+    // FILTERING LOGIC
+    // We strictly check if the variable exists AND is not empty
+    if (country && country.trim() !== "") {
+      result = result.filter(c => c.country === country);
+    }
+
+    if (type && type.trim() !== "") {
+      result = result.filter(c => c.type === type);
+    }
+
+    if (specialization && specialization.trim() !== "") {
+      // Use includes() for better matching (e.g. "CS" matches "CS/IT")
+      result = result.filter(c => c.specialization === specialization);
+    }
+
+    // 🛑 DEBUG LOG 2: Print how many matches found
+    console.log(`✅ Matches Found: ${result.length}`);
+
+    // Fallback if empty
+    if (result.length === 0) {
+      console.log("⚠️ No matches. Returning default top 4.");
+      result = college_list.slice(0, 4);
+    }
+
+    // ... (Keep your Currency and Response logic same as before) ...
+    // Currency Logic
+    let exchangeRate = 84;
+    try {
+      const rateRes = await axios.get('https://api.exchangerate-api.com/v4/latest/USD');
+      exchangeRate = rateRes.data.rates.INR;
+    } catch (e) {
+      console.log("Currency API failed");
+    }
+
+    const finalData = result.map(col => ({
+      ...col,
+      liveFees: ((col.feesUSD * exchangeRate) / 100000).toFixed(2) + " Lakhs",
+      isTopTier: col.ranking <= 10
+    }));
+
+    res.json({ success: true, data: finalData, meta: { liveRate: exchangeRate } });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
 });
+const PORT = 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on ${PORT}`));
