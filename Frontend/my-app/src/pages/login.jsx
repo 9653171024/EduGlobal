@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Onboarding from './Onboarding';
@@ -28,22 +28,24 @@ const Login = () => {
     try {
       const loadingToast = toast.loading("Logging in...");
 
-      const res=await axios.post(
+      const res = await axios.post(
         'http://localhost:5001/api/users/login',
         formData
       );
 
       toast.update(loadingToast, {
-        render: `Welcome back.${res.data.user.name}!`,
+        render: `Welcome back, ${res.data.user.name}!`,
         type: "success",
         isLoading: false,
         autoClose: 2000
       });
 
-      // save
-      localStorage.setItem('userInfo',JSON.stringify(res.data.user));
+      // ✅ Store logged-in user for Navbar
+      localStorage.setItem('user', JSON.stringify(res.data.user));
 
-      setTimeout(() => navigate('/Onboarding'), 2000);
+      setTimeout(() => {
+        navigate('/Onboarding');
+      }, 2000);
 
     } catch (err) {
       toast.dismiss();
@@ -64,6 +66,7 @@ const Login = () => {
             <input
               type="email"
               name="email"
+              value={formData.email}
               onChange={handleChange}
             />
           </div>
@@ -73,6 +76,7 @@ const Login = () => {
             <input
               type="password"
               name="password"
+              value={formData.password}
               onChange={handleChange}
             />
           </div>
