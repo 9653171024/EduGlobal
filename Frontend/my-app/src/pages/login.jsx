@@ -29,7 +29,7 @@ const Login = () => {
       const loadingToast = toast.loading("Logging in...");
 
       const res=await axios.post(
-        'http://localhost:5000/api/users/login',
+        'http://localhost:5001/api/users/login',
         formData
       );
 

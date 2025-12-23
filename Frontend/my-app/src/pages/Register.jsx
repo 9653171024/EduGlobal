@@ -41,7 +41,7 @@ const Register = () => {
     try {
       const loadingToast = toast.loading("Creating your account...");
       
-      const res = await axios.post('http://127.0.0.1:5000/api/users/register', formData);
+      const res = await axios.post('http://127.0.0.1:5001/api/users/register', formData);
 
       toast.update(loadingToast, {
         render: "Account Created! Starting Onboarding...",
