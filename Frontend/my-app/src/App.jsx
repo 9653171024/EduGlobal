@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Login from "./pages/login";
 import Onboarding from "./pages/Onboarding";
 import Recommendations from "./pages/Recommendation";
+import StudentLife from './pages/StudentLife';
 
 
 function App(){
@@ -19,6 +20,7 @@ function App(){
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/Onboarding" element={<Onboarding/>}></Route>
         <Route path="/Recommendation" element={<Recommendations/>}></Route>
+        <Route path="/student-life/:collegeName" element={<StudentLife />}></Route>
       </Routes>
     </Router>
   </>);

@@ -484,3 +484,38 @@ a { text-decoration: none; color: inherit; }
   height: 60px;
   background: linear-gradient(to top, rgba(0,0,0,0.05), transparent);
 }
+.student-life-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); /* Subtle gradient */
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover Effect: Turns Blue with White Text */
+.student-life-btn:hover {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+  box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+  transform: translateY(-2px);
+}
+
+.student-life-btn svg {
+  transition: transform 0.3s;
+}
+
+.student-life-btn:hover svg {
+  transform: translateX(4px); /* Arrow moves right on hover */
+}
