@@ -1,48 +1,57 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FaUniversity, FaGlobeAsia, FaMoneyBillWave, FaAward, FaFilter, FaUsers } from 'react-icons/fa';
+import { FaGlobeAsia, FaMoneyBillWave, FaAward, FaFilter, FaExternalLinkAlt } from 'react-icons/fa';
 
 const Recommendations = () => {
   const navigate = useNavigate();
   const [colleges, setColleges] = useState([]);
   const [loading, setLoading] = useState(true);
   const [rate, setRate] = useState(0);
-  const [errorMsg, setErrorMsg] = useState(''); // To show error on screen
+  const [errorMsg, setErrorMsg] = useState('');
+  
+  // --- ANIMATED HEADER STATE ---
+  const [headerText, setHeaderText] = useState("");
+  const fullText = " Top Matches! 🚀";
 
+  // Typewriter Effect Logic
+  useEffect(() => {
+    let i = 0;
+    const typing = setInterval(() => {
+      if (i < fullText.length) {
+        setHeaderText(fullText.slice(0, i + 1));
+        i++;
+      } else {
+        clearInterval(typing);
+      }
+    }, 50); // Speed of typing
+
+    return () => clearInterval(typing);
+  }, []);
+
+  // Fetch Data Logic
   useEffect(() => {
     const fetchRecommendations = async () => {
-      console.log(" 1. Component Mounted. Checking Local Storage...");
-      
+      // Get preferences or use defaults
       const storedPrefs = localStorage.getItem('userPreferences');
-      // Default preferences if empty
       const prefs = storedPrefs ? JSON.parse(storedPrefs) : { country: 'India', type: 'Govt', specialization: 'CS' };
       
-      console.log("2. Sending Request to Backend with:", prefs);
-
       try {
-        
-        // Use 127.0.0.1 to avoid Windows localhost issues
+        // NOTE: Ensure port matches your backend (5000 or 5001)
         const res = await axios.post('http://127.0.0.1:5001/api/colleges/recommend', prefs || {});
         
-        console.log(" 3. Response Received:", res.status, res.data);
-
         if (res.data && res.data.success) {
-          console.log(" 4. Data is Valid. Setting State...");
-          console.log("   -> Colleges found:", res.data.data.length);
           setColleges(res.data.data);
           setRate(res.data.meta.liveRate);
         } else {
-          console.error("Backend returned success: false", res.data);
-          setErrorMsg("Backend returned an error.");
+          setErrorMsg("Could not fetch recommendations.");
         }
-
       } catch (err) {
-        console.error("3. Request Failed:", err);
+        console.error(err);
         setErrorMsg("Failed to connect to server. Ensure Backend is running.");
       } finally {
-        console.log(" 5. Turning off Loading Spinner.");
-        setLoading(false);
+        // Small delay to make the loading transition smooth
+        setTimeout(() => setLoading(false), 500);
       }
     };
 
@@ -50,111 +59,117 @@ const Recommendations = () => {
   }, [navigate]);
 
   return (
-    <div style={{ padding: '3rem 8%', background: '#f8fafc', minHeight: '100vh' }}>
+    <div style={{ padding: '3rem 8%', minHeight: '100vh', maxWidth: '1400px', margin: '0 auto' }}>
       
-      <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
+      {/* --- HEADER SECTION --- */}
+      <div style={{ marginBottom: '3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px' }}>
         <div>
-          <h1 style={{ fontSize: '2.2rem', color: '#1e293b', marginBottom: '10px' }}>
-            Top Matches for You 🎯
+          {/* Animated Header */}
+          <h1 style={{ fontSize: '2.5rem', color: '#0f172a', marginBottom: '8px', fontWeight: '800', letterSpacing: '-1px', height: '60px' }}>
+            <span className="typing-cursor">{headerText}</span>
           </h1>
-          <p style={{ color: '#64748b' }}>
-            Real-time fees: <b style={{ color: '#10b981' }}>1 USD = ₹{rate}</b>
-          </p>
+          
+          {/* Currency Badge */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1rem', color: '#64748b' }}>
+            <span>Live Currency:</span>
+            <span style={{ background: '#dcfce7', color: '#166534', padding: '4px 10px', borderRadius: '6px', fontWeight: 'bold', fontSize: '0.9rem' }}>
+              1 USD = ₹{rate}
+            </span>
+          </div>
         </div>
-        <button
-          onClick={() => navigate('/onboarding')}
-          style={{
-            padding: '10px 20px',
-            border: '1px solid #cbd5e1',
-            background: 'white',
-            borderRadius: '8px',
-            cursor: 'pointer'
-          }}
-        >
-          <FaFilter /> Filters
+        
+        {/* Filter Button */}
+        <button className="filter-glass-btn" onClick={() => navigate('/onboarding')}>
+          <FaFilter size={14} /> Adjust Filters
         </button>
       </div>
 
+      {/* --- ERROR MESSAGE --- */}
       {errorMsg && (
-        <div style={{ padding: '20px', background: '#fee2e2', color: '#b91c1c', borderRadius: '8px', marginBottom: '20px' }}>
+        <div style={{ padding: '16px', background: '#fee2e2', color: '#991b1b', borderRadius: '8px', border: '1px solid #fecaca', marginBottom: '30px' }}>
           <strong>Error:</strong> {errorMsg}
         </div>
       )}
 
-      {loading ? (
-        <div style={{ textAlign: 'center', marginTop: '50px', color: '#64748b' }}>
-          <h2>🤖 loading..</h2>
-        </div>
-      ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
-          {colleges.length > 0 ? (
-            colleges.map((col, index) => (
-              <div key={index} className="college-card">
-                <div
-                  style={{
-                    height: '150px',
-                    background: `url(${col.image}) center/cover no-repeat`,
-                    backgroundColor: '#cbd5e1',
-                    borderRadius: '12px 12px 0 0'
-                  }}
-                ></div>
-
-                <div style={{ padding: '1.5rem' }}>
-                  <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-                    <span className="badge-blue">{col.specialization}</span>
-                    {col.isTopTier && (
-                      <span className="badge-gold">
-                        <FaAward /> Top Tier
-                      </span>
-                    )}
-                  </div>
-
-                  <h3 style={{ fontSize: '1.25rem', margin: '0 0 6px 0', color: '#1e293b' }}>
-                    {col.name}
-                  </h3>
-
-                  <div style={{ color: '#64748b', fontSize: '0.9rem' }}>
-                    <FaGlobeAsia /> {col.country}
-                  </div>
-
-                  <div style={{ marginTop: '1.5rem', padding: '12px', background: '#f0fdf4', borderRadius: '8px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: '0.8rem', color: '#15803d' }}>Fees:</span>
-                      <strong style={{ color: '#166534' }}>
-                        <FaMoneyBillWave /> ₹{col.liveFees}
-                      </strong>
-                    </div>
-                  </div>
-
-                  {/* Apply Button - Redirects to Official Website */}
-                  <button
-                    className="view-btn"
-                    style={{ marginTop: '1rem' }}
-                    onClick={() => {
-                      const website =
-                        typeof col.website === 'string' && col.website.trim()
-                          ? col.website.trim().startsWith('http')
-                            ? col.website.trim()
-                            : `https://${col.website.trim()}`
-                          : null;
-
-                      if (website) {
-                        window.open(website, '_blank', 'noopener,noreferrer');
-                      } else {
-                        alert('Official website not available');
-                      }
-                    }}
-                  >
-                    Visit Official Website
-                  </button>
-                </div>
+      {/* --- CARDS GRID --- */}
+      {/* Using the new 'recommendations-grid' class for better spacing */}
+      <div className="recommendations-grid">
+        
+        {loading ? (
+           <h3 style={{color: '#64748b', gridColumn: '1/-1', textAlign: 'center'}}>
+             🤖 AI is finding the best colleges for you...
+           </h3>
+        ) : colleges.length > 0 ? (
+          colleges.map((col, index) => (
+            <div key={index} className="college-card">
+              
+              {/* IMAGE HEADER */}
+              <div 
+                className="card-image-container"
+                style={{ backgroundImage: `url(${col.image})` }}
+              >
+                <div className="card-image-overlay"></div>
               </div>
-            ))
-          ) : (
-            <h3>No colleges found. Check backend logs.</h3>
-          )}
-        </div>
-      )}
+
+              {/* CARD CONTENT */}
+              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                
+                {/* Badges Row */}
+                <div className="badge-container">
+                  <span className="badge-blue">{col.specialization}</span>
+                  {col.isTopTier && (
+                    <span className="badge-gold">
+                      <FaAward /> Top Tier
+                    </span>
+                  )}
+                </div>
+
+                {/* College Name */}
+                <h3 style={{ fontSize: '1.35rem', margin: '0 0 8px 0', color: '#0f172a', fontWeight: '700' }}>
+                  {col.name}
+                </h3>
+
+                {/* Location Subtitle */}
+                <div style={{ color: '#64748b', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '1.5rem' }}>
+                  <FaGlobeAsia color="#94a3b8" /> 
+                  <span>{col.country} • Rank #{col.ranking}</span>
+                </div>
+
+                {/* Fees Box */}
+                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '12px', marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontSize: '0.75rem', color: '#64748b', textTransform: 'uppercase', fontWeight: '600' }}>Est. Annual Fees</span>
+                    <strong style={{ color: '#0f172a', fontSize: '1.1rem' }}>₹{col.liveFees}</strong>
+                  </div>
+                  <div style={{ background: '#dcfce7', padding: '8px', borderRadius: '50%', color: '#15803d' }}>
+                    <FaMoneyBillWave />
+                  </div>
+                </div>
+
+                {/* Visit Website Button */}
+                <button
+                  className="visit-site-btn"
+                  onClick={() => {
+                    const website = col.website && col.website.trim().startsWith('http') 
+                      ? col.website.trim() 
+                      : `https://${col.website?.trim()}`;
+                    
+                    if (col.website) window.open(website, '_blank', 'noopener,noreferrer');
+                    else alert('Official website link not available');
+                  }}
+                >
+                  Visit Website <FaExternalLinkAlt size={12} />
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '4rem', color: '#64748b' }}>
+            <h3>No colleges match your specific filters.</h3>
+            <p>Try adjusting your search criteria.</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
