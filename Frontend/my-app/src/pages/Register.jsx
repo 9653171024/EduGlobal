@@ -59,7 +59,7 @@ const Register = () => {
       };
       localStorage.setItem('userInfo', JSON.stringify(userToSave));
 
-      setTimeout(() => navigate('/onboarding'), 1500);
+      setTimeout(() => navigate('/login'), 1500);
 
     } catch (err) {
       toast.dismiss();

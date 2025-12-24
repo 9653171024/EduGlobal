@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "JEE Mains 2025",
+    "organizer": "National Testing Agency",
+    "category": "Engineering",
+    "deadline": "2025-11-30",
+    "examDate": "Jan 24, 2025",
+    "website": "https://jeemain.nta.nic.in/",
+    "logo": "/images/jee.png",
+    "tags": ["National", "Online"]
+  },
+  {
+    "id": 2,
+    "name": "NEET UG 2025",
+    "organizer": "NTA",
+    "category": "Medical",
+    "deadline": "2025-04-10",
+    "examDate": "May 05, 2025",
+    "website": "https://neet.nta.nic.in/",
+    "logo": "/images/neet.jpg",
+    "tags": ["Medical", "Offline"]
+  },
+  {
+    "id": 3,
+    "name": "CAT 2025",
+    "organizer": "IIM Calcutta",
+    "category": "Management",
+    "deadline": "2025-09-15",
+    "examDate": "Nov 24, 2025",
+    "website": "https://iimcat.ac.in/",
+    "logo": "/images/cat.jpg",
+    "tags": ["MBA", "IIM"]
+  },
+  {
+    "id": 4,
+    "name": "GATE 2025",
+    "organizer": "IIT Roorkee",
+    "category": "Engineering",
+    "deadline": "2025-10-20",
+    "examDate": "Feb 03, 2025",
+    "website": "https://gate.iitk.ac.in/",
+    "logo": "/images/gate.jpg",
+    "tags": ["M.Tech", "PSU Jobs"]
+  },
+  {
+    "id": 5,
+    "name": "GRE General",
+    "organizer": "ETS",
+    "category": "Study Abroad",
+    "deadline": "2025-12-31",
+    "examDate": "Flexible",
+    "website": "https://www.ets.org/gre",
+    "logo": "/images/gre.jpg",
+    "tags": ["Global", "MS/MBA"]
+  },
+  {
+    "id": 6,
+    "name": "IELTS",
+    "organizer": "British Council",
+    "category": "Study Abroad",
+    "deadline": "Rolling",
+    "examDate": "Monthly",
+    "website": "https://www.ielts.org/",
+    "logo": "/images/ielts.png",
+    "tags": ["English", "Visa"]
+  }
+]
