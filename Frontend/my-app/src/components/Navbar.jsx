@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       {/* LOGO */}
-      <Link to="/" className="logo">
+      <Link to="/" className="navbar-logo">
         <FaGraduationCap /> EduGlobal
         {user && (
           <span

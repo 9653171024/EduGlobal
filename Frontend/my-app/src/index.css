@@ -55,7 +55,8 @@ a { text-decoration: none; color: inherit; }
   z-index: 1000;
 }
 
-.logo { 
+.navbar-logo { 
+   color: #2563eb;
   font-size: 1.4rem; 
   font-weight: 800; 
   color: var(--primary); 
@@ -103,6 +104,9 @@ a { text-decoration: none; color: inherit; }
   background-color: var(--primary-dark);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+}
+.navbar-logo svg {
+  color: #2563eb;
 }
 
 /* =========================================
@@ -483,4 +487,16 @@ a { text-decoration: none; color: inherit; }
   width: 100%;
   height: 60px;
   background: linear-gradient(to top, rgba(0,0,0,0.05), transparent);
+}
+.sidebar {
+  background: #1e293b;
+  color: #fff;
+  height: calc(100vh - 70px); /* Adjust height so it doesn't scroll too far */
+  position: fixed;
+  top: 70px; /* <--- CHANGED: Pushes sidebar below the Navbar */
+  left: 0;
+  z-index: 900; /* Lower than Navbar (which is usually 1000) */
+  transition: all 0.5s;
+  overflow-x: hidden;
+  white-space: nowrap;
 }
