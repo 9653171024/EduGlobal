@@ -7,7 +7,8 @@
     "ranking": 1,
     "feesUSD": 58000,
     "deadline": "2025-01-05",
-    "image": "/images/mit.jpg"
+    "image": "/images/mit.jpg",
+    "website": "https://www.mit.edu/"
   },
   {
     "name": "Stanford University",
@@ -17,7 +18,30 @@
     "ranking": 2,
     "feesUSD": 60000,
     "deadline": "2025-04-15",
-    "image": "/images/standford.jpg"
+    "image": "/images/standford.jpg",
+    "website": "https://www.stanford.edu/"
+  },
+  {
+    "name": "Technical University of Munich (TUM)",
+    "country": "Abroad",
+    "type": "Govt",
+    "specialization": "CS",
+    "ranking": 25,
+    "feesUSD": 0,
+    "deadline": "2025-05-31",
+    "image": "/images/london.jpg",
+    "website": "https://www.tum.de/en/"
+  },
+  {
+    "name": "ETH Zurich",
+    "country": "Abroad",
+    "type": "Govt",
+    "specialization": "CS",
+    "ranking": 7,
+    "feesUSD": 1500,
+    "deadline": "2025-04-30",
+    "image": "/images/oxford.jpg",
+    "website": "https://ethz.ch/en.html"
   },
   {
     "name": "IIT Bombay",
@@ -27,7 +51,41 @@
     "ranking": 15,
     "feesUSD": 3500,
     "deadline": "2025-06-30",
-    "image": "/images/iit.jpg"
+    "image": "/images/iit.jpg",
+    "website": "https://www.iitb.ac.in/"
+  },
+  {
+    "name": "IIT Delhi",
+    "country": "India",
+    "type": "Govt",
+    "specialization": "CS",
+    "ranking": 18,
+    "feesUSD": 3500,
+    "deadline": "2025-06-30",
+    "image": "/images/iit.jpg",
+    "website": "https://home.iitd.ac.in/"
+  },
+  {
+    "name": "BITS Pilani",
+    "country": "India",
+    "type": "Private",
+    "specialization": "CS",
+    "ranking": 30,
+    "feesUSD": 7000,
+    "deadline": "2025-07-15",
+    "image": "/images/iima.jpg",
+    "website": "https://www.bits-pilani.ac.in/"
+  },
+  {
+    "name": "VIT Vellore",
+    "country": "India",
+    "type": "Private",
+    "specialization": "CS",
+    "ranking": 45,
+    "feesUSD": 2500,
+    "deadline": "2025-05-15",
+    "image": "/images/aiims.jpg",
+    "website": "https://vit.ac.in/"
   },
   {
     "name": "Harvard Medical School",
@@ -37,7 +95,19 @@
     "ranking": 1,
     "feesUSD": 65000,
     "deadline": "2025-02-10",
-    "image": "/images/harvard.jpg"
+    "image": "/images/harvard.jpg",
+    "website": "https://hms.harvard.edu/"
+  },
+  {
+    "name": "Johns Hopkins University",
+    "country": "Abroad",
+    "type": "Private",
+    "specialization": "Medical",
+    "ranking": 3,
+    "feesUSD": 62000,
+    "deadline": "2025-03-01",
+    "image": "/images/harvard.jpg",
+    "website": "https://www.hopkinsmedicine.org/som/"
   },
   {
     "name": "AIIMS Delhi",
@@ -47,7 +117,19 @@
     "ranking": 1,
     "feesUSD": 100,
     "deadline": "2025-05-01",
-    "image": "/images/aiims.jpg"
+    "image": "/images/aiims.jpg",
+    "website": "https://www.aiims.edu/"
+  },
+  {
+    "name": "CMC Vellore",
+    "country": "India",
+    "type": "Private",
+    "specialization": "Medical",
+    "ranking": 5,
+    "feesUSD": 500,
+    "deadline": "2025-04-20",
+    "image": "/images/aiims.jpg",
+    "website": "https://www.cmch-vellore.edu/"
   },
   {
     "name": "London Business School",
@@ -57,7 +139,8 @@
     "ranking": 5,
     "feesUSD": 70000,
     "deadline": "2025-03-20",
-    "image": "/images/london.jpg"
+    "image": "/images/london.jpg",
+    "website": "https://www.london.edu/"
   },
   {
     "name": "IIM Ahmedabad",
@@ -67,7 +150,19 @@
     "ranking": 40,
     "feesUSD": 30000,
     "deadline": "2025-01-15",
-    "image": "/images/iima.jpg"
+    "image": "/images/iima.jpg",
+    "website": "https://www.iima.ac.in/"
+  },
+  {
+    "name": "ISB Hyderabad",
+    "country": "India",
+    "type": "Private",
+    "specialization": "MBA",
+    "ranking": 35,
+    "feesUSD": 45000,
+    "deadline": "2025-02-20",
+    "image": "/images/iima.jpg",
+    "website": "https://www.isb.edu/"
   },
   {
     "name": "University of Oxford",
@@ -77,6 +172,51 @@
     "ranking": 3,
     "feesUSD": 45000,
     "deadline": "2025-10-15",
-    "image": "/images/oxford.jpg"
+    "image": "/images/oxford.jpg",
+    "website": "https://www.ox.ac.uk/"
+  },
+  {
+    "name": "Jawaharlal Nehru University (JNU)",
+    "country": "India",
+    "type": "Govt",
+    "specialization": "Arts",
+    "ranking": 10,
+    "feesUSD": 200,
+    "deadline": "2025-05-15",
+    "image": "/images/iit.jpg",
+    "website": "https://www.jnu.ac.in/"
+  },
+  {
+    "name": "Parsons School of Design",
+    "country": "Abroad",
+    "type": "Private",
+    "specialization": "Arts",
+    "ranking": 4,
+    "feesUSD": 52000,
+    "deadline": "2025-03-01",
+    "image": "/images/london.jpg",
+    "website": "https://www.newschool.edu/parsons/"
+  },
+  {
+    "name": "Ashoka University",
+    "country": "India",
+    "type": "Private",
+    "specialization": "Arts",
+    "ranking": 25,
+    "feesUSD": 11000,
+    "deadline": "2025-06-01",
+    "image": "/images/standford.jpg",
+    "website": "https://www.ashoka.edu.in/"
+  },
+  {
+    "name": "National University of Singapore",
+    "country": "Abroad",
+    "type": "Govt",
+    "specialization": "CS",
+    "ranking": 8,
+    "feesUSD": 20000,
+    "deadline": "2025-02-28",
+    "image": "/images/mit.jpg",
+    "website": "https://www.nus.edu.sg/"
   }
 ]

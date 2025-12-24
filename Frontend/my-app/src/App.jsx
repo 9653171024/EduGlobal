@@ -5,7 +5,8 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/login";
 import Onboarding from "./pages/Onboarding";
-import './pages/Onboarding.css';
+
+import Recommendations from "./pages/Recommendation";
 
 
 function App(){

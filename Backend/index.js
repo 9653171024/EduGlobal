@@ -8,6 +8,7 @@ const path = require('path');
 let college_list = [];
 try {
   college_list = require('./data/colleges.json');
+  console.log(college_list)
 } catch (e) {
   console.error("⚠️ Could not load colleges.json. Check file path!");
   college_list = []; // Fallback empty array
@@ -78,68 +79,69 @@ app.post('/api/users/login', async (req, res) => {
   }
 });
 
-// --- RECOMMENDATION ROUTE (The Fix) ---
-// --- RECOMMENDATION ROUTE (DEBUG VERSION) ---
+// --- SMART RECOMMENDATION ROUTE ---
+// --- RECOMMENDATION ROUTE (Anti-Hang Version) ---
 app.post('/api/colleges/recommend', async (req, res) => {
+  console.log("📩 Recommendation Request Received..."); // Log when request hits
+
   try {
     const { country, type, specialization } = req.body || {};
 
-    // 🛑 DEBUG LOG 1: Print what the backend received
-    console.log("------------------------------------------------");
-    console.log("🔍 REQUEST RECEIVED:");
-    console.log("Country:", country);
-    console.log("Type:", type);
-    console.log("Specialization:", specialization);
-    console.log("------------------------------------------------");
-
     let result = college_list;
 
-    // FILTERING LOGIC
-    // We strictly check if the variable exists AND is not empty
-    if (country && country.trim() !== "") {
-      result = result.filter(c => c.country === country);
+    // 1. Strict Filter
+    let strictMatches = result.filter(c => 
+      (!country || c.country === country) &&
+      (!type || c.type === type) &&
+      (!specialization || c.specialization === specialization)
+    );
+
+    if (strictMatches.length > 0) {
+      result = strictMatches;
+    } else {
+      console.log("⚠️ Fallback Logic Triggered");
+      // Fallback: Priority to Specialization
+      let fallbackSpec = result.filter(c => c.specialization === specialization);
+      if (fallbackSpec.length > 0) result = fallbackSpec;
+      else if (country) result = result.filter(c => c.country === country);
     }
 
-    if (type && type.trim() !== "") {
-      result = result.filter(c => c.type === type);
-    }
+    if (result.length === 0) result = college_list.slice(0, 4);
 
-    if (specialization && specialization.trim() !== "") {
-      // Use includes() for better matching (e.g. "CS" matches "CS/IT")
-      result = result.filter(c => c.specialization === specialization);
-    }
-
-    // 🛑 DEBUG LOG 2: Print how many matches found
-    console.log(`✅ Matches Found: ${result.length}`);
-
-    // Fallback if empty
-    if (result.length === 0) {
-      console.log("⚠️ No matches. Returning default top 4.");
-      result = college_list.slice(0, 4);
-    }
-
-    // ... (Keep your Currency and Response logic same as before) ...
-    // Currency Logic
-    let exchangeRate = 84;
+    // 2. Currency Conversion (WITH TIMEOUT)
+    let exchangeRate = 84; 
     try {
-      const rateRes = await axios.get('https://api.exchangerate-api.com/v4/latest/USD');
+      console.log("💱 Fetching Currency...");
+      const rateRes = await axios.get('https://api.exchangerate-api.com/v4/latest/USD', {
+        timeout: 2000 // 🛑 Stop waiting after 2 seconds
+      });
       exchangeRate = rateRes.data.rates.INR;
+      console.log("✅ Currency Fetched:", exchangeRate);
     } catch (e) {
-      console.log("Currency API failed");
+      console.log("⚠️ Currency API Slow/Failed. Using Default 84.");
     }
 
+    // 3. Enrich Data
     const finalData = result.map(col => ({
       ...col,
       liveFees: ((col.feesUSD * exchangeRate) / 100000).toFixed(2) + " Lakhs",
       isTopTier: col.ranking <= 10
     }));
 
+    console.log("🚀 Sending Response back to Frontend");
     res.json({ success: true, data: finalData, meta: { liveRate: exchangeRate } });
 
   } catch (error) {
-    console.error(error);
+    console.error("❌ Server Error:", error.message);
     res.status(500).json({ message: "Server Error" });
   }
 });
+
+// --- KEEP YOUR USER ROUTES ---
+app.post('/api/users/register', async (req, res) => { /* Keeping existing logic */ }); 
+app.post('/api/users/login', async (req, res) => { /* Keeping existing logic */ });
+
+
+
 const PORT = 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on ${PORT}`));
