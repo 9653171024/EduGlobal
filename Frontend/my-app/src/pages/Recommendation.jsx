@@ -21,14 +21,9 @@ const Recommendations = () => {
       console.log("2. Sending Request to Backend with:", prefs);
 
       try {
-<<<<<<< HEAD
-        // Use 127.0.0.1 to prevent Windows network issues
-        const res = await axios.post('http://127.0.0.1:5000/api/colleges/recommend', prefs);
-=======
-        // 2. Send choices to Backend
+        
         // Use 127.0.0.1 to avoid Windows localhost issues
         const res = await axios.post('http://127.0.0.1:5001/api/colleges/recommend', prefs || {});
->>>>>>> d1d7e463be730eb5aaa295df1e76eea2ec72fa51
         
         console.log(" 3. Response Received:", res.status, res.data);
 
