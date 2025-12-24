@@ -1,0 +1,302 @@
+[
+  {
+    "university": "Massachusetts Institute of Technology (MIT)",
+    "hostels": [
+      {
+        "name": "MIT Undergraduate Residence Halls",
+        "gender": "Co-ed",
+        "roomTypes": ["Single", "Double"],
+        "rentPerMonthUSD": 1100,
+        "amenities": ["WiFi", "Dining Hall", "Laundry", "Security", "Study Rooms"],
+        "distanceKm": 0.3,
+        "applicationRequired": true,
+        "website": "https://studentlife.mit.edu/housing"
+      }
+    ]
+  },
+  {
+    "university": "Stanford University",
+    "hostels": [
+      {
+        "name": "Stanford On-Campus Housing",
+        "gender": "Co-ed",
+        "roomTypes": ["Single", "Shared"],
+        "rentPerMonthUSD": 1200,
+        "amenities": ["WiFi", "Dining", "Laundry", "Recreation"],
+        "distanceKm": 0.4,
+        "applicationRequired": true,
+        "website": "https://rde.stanford.edu/studenthousing"
+      }
+    ]
+  },
+  {
+    "university": "Technical University of Munich (TUM)",
+    "hostels": [
+      {
+        "name": "Studentenwerk München Dormitories",
+        "gender": "Co-ed",
+        "roomTypes": ["Single", "Shared"],
+        "rentPerMonthUSD": 320,
+        "amenities": ["WiFi", "Laundry", "Shared Kitchen", "Security"],
+        "distanceKm": 1.1,
+        "applicationRequired": true,
+        "website": "https://www.studentenwerk-muenchen.de/en/accommodation/"
+      }
+    ]
+  },
+  {
+    "university": "ETH Zurich",
+    "hostels": [
+      {
+        "name": "ETH Zurich Student Housing",
+        "gender": "Co-ed",
+        "roomTypes": ["Single"],
+        "rentPerMonthUSD": 480,
+        "amenities": ["WiFi", "Laundry", "Study Areas"],
+        "distanceKm": 0.9,
+        "applicationRequired": true,
+        "website": "https://ethz.ch/en/studies/living-working/accommodation.html"
+      }
+    ]
+  },
+  {
+    "university": "IIT Bombay",
+    "hostels": [
+      {
+        "name": "IIT Bombay Hostels",
+        "gender": "Separate Blocks",
+        "roomTypes": ["Single", "Double"],
+        "rentPerMonthUSD": 40,
+        "amenities": ["Mess", "WiFi", "Sports Facilities", "Security"],
+        "distanceKm": 0.2,
+        "applicationRequired": false,
+        "website": "https://www.iitb.ac.in/en/student-life"
+      }
+    ]
+  },
+  {
+    "university": "IIT Delhi",
+    "hostels": [
+      {
+        "name": "IIT Delhi Hostels",
+        "gender": "Separate Blocks",
+        "roomTypes": ["Single", "Double"],
+        "rentPerMonthUSD": 45,
+        "amenities": ["Mess", "WiFi", "Gym", "Security"],
+        "distanceKm": 0.2,
+        "applicationRequired": false,
+        "website": "https://hostels.iitd.ac.in/"
+      }
+    ]
+  },
+  {
+    "university": "BITS Pilani",
+    "hostels": [
+      {
+        "name": "BITS Pilani Campus Hostels",
+        "gender": "Separate Blocks",
+        "roomTypes": ["Single", "Double"],
+        "rentPerMonthUSD": 80,
+        "amenities": ["Mess", "WiFi", "Laundry", "Security"],
+        "distanceKm": 0.3,
+        "applicationRequired": false,
+        "website": "https://www.bits-pilani.ac.in/Pilani/Hostels"
+      }
+    ]
+  },
+  {
+    "university": "VIT Vellore",
+    "hostels": [
+      {
+        "name": "VIT University Hostels",
+        "gender": "Separate Blocks",
+        "roomTypes": ["2-Bed", "4-Bed"],
+        "rentPerMonthUSD": 150,
+        "amenities": ["Mess", "WiFi", "Medical Center", "Security"],
+        "distanceKm": 0.1,
+        "applicationRequired": true,
+        "website": "https://vit.ac.in/campuslife/hostels"
+      }
+    ]
+  },
+  {
+    "university": "Harvard Medical School",
+    "hostels": [
+      {
+        "name": "Harvard Medical School Housing",
+        "gender": "Co-ed",
+        "roomTypes": ["Single"],
+        "rentPerMonthUSD": 1300,
+        "amenities": ["WiFi", "Laundry", "Study Rooms"],
+        "distanceKm": 0.6,
+        "applicationRequired": true,
+        "website": "https://www.huhousing.harvard.edu/"
+      }
+    ]
+  },
+  {
+    "university": "Johns Hopkins University",
+    "hostels": [
+      {
+        "name": "JHU Student Housing",
+        "gender": "Co-ed",
+        "roomTypes": ["Single", "Shared"],
+        "rentPerMonthUSD": 950,
+        "amenities": ["WiFi", "Laundry", "Dining"],
+        "distanceKm": 0.5,
+        "applicationRequired": true,
+        "website": "https://studentaffairs.jhu.edu/community-living/"
+      }
+    ]
+  },
+  {
+    "university": "AIIMS Delhi",
+    "hostels": [
+      {
+        "name": "AIIMS Campus Hostels",
+        "gender": "Separate Blocks",
+        "roomTypes": ["Single"],
+        "rentPerMonthUSD": 15,
+        "amenities": ["Mess", "Security", "Medical Facilities"],
+        "distanceKm": 0.1,
+        "applicationRequired": false,
+        "website": "https://www.aiims.edu/en/campus-life.html"
+      }
+    ]
+  },
+  {
+    "university": "CMC Vellore",
+    "hostels": [
+      {
+        "name": "CMC Student Hostels",
+        "gender": "Separate Blocks",
+        "roomTypes": ["Single", "Shared"],
+        "rentPerMonthUSD": 60,
+        "amenities": ["Mess", "WiFi", "Security"],
+        "distanceKm": 0.2,
+        "applicationRequired": true,
+        "website": "https://www.cmch-vellore.edu/campus-life"
+      }
+    ]
+  },
+  {
+    "university": "London Business School",
+    "hostels": [
+      {
+        "name": "LBS Student Residences",
+        "gender": "Co-ed",
+        "roomTypes": ["Studio"],
+        "rentPerMonthUSD": 1400,
+        "amenities": ["WiFi", "Gym", "Laundry"],
+        "distanceKm": 0.4,
+        "applicationRequired": true,
+        "website": "https://www.london.edu/student-life/accommodation"
+      }
+    ]
+  },
+  {
+    "university": "IIM Ahmedabad",
+    "hostels": [
+      {
+        "name": "IIMA Dormitories",
+        "gender": "Separate Blocks",
+        "roomTypes": ["Single"],
+        "rentPerMonthUSD": 120,
+        "amenities": ["Mess", "WiFi", "Sports", "Security"],
+        "distanceKm": 0.1,
+        "applicationRequired": false,
+        "website": "https://www.iima.ac.in/student-life"
+      }
+    ]
+  },
+  {
+    "university": "ISB Hyderabad",
+    "hostels": [
+      {
+        "name": "ISB Campus Residences",
+        "gender": "Co-ed",
+        "roomTypes": ["Single"],
+        "rentPerMonthUSD": 300,
+        "amenities": ["Mess", "WiFi", "Gym", "Security"],
+        "distanceKm": 0.1,
+        "applicationRequired": false,
+        "website": "https://www.isb.edu/en/student-life.html"
+      }
+    ]
+  },
+  {
+    "university": "University of Oxford",
+    "hostels": [
+      {
+        "name": "Oxford College Accommodation",
+        "gender": "Co-ed",
+        "roomTypes": ["Single"],
+        "rentPerMonthUSD": 700,
+        "amenities": ["WiFi", "Dining Hall", "Laundry"],
+        "distanceKm": 0.6,
+        "applicationRequired": true,
+        "website": "https://www.ox.ac.uk/students/life/accommodation"
+      }
+    ]
+  },
+  {
+    "university": "Jawaharlal Nehru University (JNU)",
+    "hostels": [
+      {
+        "name": "JNU Hostels",
+        "gender": "Separate Blocks",
+        "roomTypes": ["Single"],
+        "rentPerMonthUSD": 20,
+        "amenities": ["Mess", "WiFi", "Security"],
+        "distanceKm": 0.2,
+        "applicationRequired": false,
+        "website": "https://www.jnu.ac.in/hostels"
+      }
+    ]
+  },
+  {
+    "university": "Parsons School of Design",
+    "hostels": [
+      {
+        "name": "The New School Student Housing",
+        "gender": "Co-ed",
+        "roomTypes": ["Shared", "Studio"],
+        "rentPerMonthUSD": 1300,
+        "amenities": ["WiFi", "Laundry", "Security"],
+        "distanceKm": 0.8,
+        "applicationRequired": true,
+        "website": "https://housing.newschool.edu/"
+      }
+    ]
+  },
+  {
+    "university": "Ashoka University",
+    "hostels": [
+      {
+        "name": "Ashoka University Residences",
+        "gender": "Separate Blocks",
+        "roomTypes": ["Single", "Double"],
+        "rentPerMonthUSD": 200,
+        "amenities": ["Mess", "WiFi", "Medical Center", "Security"],
+        "distanceKm": 0.1,
+        "applicationRequired": false,
+        "website": "https://www.ashoka.edu.in/campus-life/"
+      }
+    ]
+  },
+  {
+    "university": "National University of Singapore",
+    "hostels": [
+      {
+        "name": "NUS Residential Colleges & Halls",
+        "gender": "Co-ed",
+        "roomTypes": ["Single", "Double"],
+        "rentPerMonthUSD": 450,
+        "amenities": ["WiFi", "Dining", "Gym", "Security"],
+        "distanceKm": 0.2,
+        "applicationRequired": true,
+        "website": "https://nus.edu.sg/osa/student-services/hostel-admission"
+      }
+    ]
+  }
+]

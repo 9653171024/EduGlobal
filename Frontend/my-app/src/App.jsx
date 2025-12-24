@@ -11,8 +11,12 @@ import Register from "./pages/Register";
 import Login from "./pages/login"; 
 import Onboarding from "./pages/Onboarding";
 import Recommendations from "./pages/Recommendation";
+<<<<<<< HEAD
+import StudentLife from './pages/StudentLife';
+=======
 import EntranceExams from "./pages/Entrance";
 import Scholarships from "./pages/Scholarships";
+>>>>>>> db0160321feeb1479ce6d40ae3892aaa56a060be
 
 
 const AppLayout = ({ children }) => {
@@ -37,6 +41,16 @@ function App() {
     <Router>
       
       <Navbar />
+<<<<<<< HEAD
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/Onboarding" element={<Onboarding/>}></Route>
+        <Route path="/Recommendation" element={<Recommendations/>}></Route>
+        <Route path="/student-life/:collegeName" element={<StudentLife />}></Route>
+      </Routes>
+=======
 
       <AppLayout>
         <Routes>
@@ -55,6 +69,7 @@ function App() {
           <Route path="/dashboard" element={<Recommendations />} />
         </Routes>
       </AppLayout>
+>>>>>>> db0160321feeb1479ce6d40ae3892aaa56a060be
     </Router>
   );
 }

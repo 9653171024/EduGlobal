@@ -160,6 +160,15 @@ const Recommendations = () => {
                 >
                   Visit Website <FaExternalLinkAlt size={12} />
                 </button>
+                <button
+                className="student-life-btn"
+                onClick={() =>
+                  navigate(`/student-life/${encodeURIComponent(col.name)}`)
+                  }
+                >
+                Accommodations & Jobs
+                </button>
+
               </div>
             </div>
           ))
