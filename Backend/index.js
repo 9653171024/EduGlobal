@@ -143,5 +143,5 @@ app.post('/api/users/login', async (req, res) => { /* Keeping existing logic */ 
 
 
 
-const PORT = 5000;
+const PORT = 5001;
 app.listen(PORT, () => console.log(`🚀 Server running on ${PORT}`));

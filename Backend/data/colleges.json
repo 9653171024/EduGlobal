@@ -52,7 +52,7 @@
     "feesUSD": 3500,
     "deadline": "2025-06-30",
     "image": "/images/iit.jpg",
-    "website": "https://www.iitb.ac.in/"
+    "website": "https://www.iitb.ac.in"
   },
   {
     "name": "IIT Delhi",
@@ -63,7 +63,7 @@
     "feesUSD": 3500,
     "deadline": "2025-06-30",
     "image": "/images/iit.jpg",
-    "website": "https://home.iitd.ac.in/"
+    "website": "https://home.iitd.ac.in"
   },
   {
     "name": "BITS Pilani",
