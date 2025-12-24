@@ -57,14 +57,24 @@ const Recommendations = () => {
           <h1 style={{ fontSize: '2.2rem', color: '#1e293b', marginBottom: '10px' }}>
             Top Matches for You 🎯
           </h1>
-          <p style={{ color: '#64748b' }}>Real-time fees: <b style={{color:'#10b981'}}>1 USD = ₹{rate}</b></p>
+          <p style={{ color: '#64748b' }}>
+            Real-time fees: <b style={{ color: '#10b981' }}>1 USD = ₹{rate}</b>
+          </p>
         </div>
-        <button onClick={() => navigate('/onboarding')} style={{ padding: '10px 20px', border: '1px solid #cbd5e1', background: 'white', borderRadius: '8px', cursor: 'pointer' }}>
+        <button
+          onClick={() => navigate('/onboarding')}
+          style={{
+            padding: '10px 20px',
+            border: '1px solid #cbd5e1',
+            background: 'white',
+            borderRadius: '8px',
+            cursor: 'pointer'
+          }}
+        >
           <FaFilter /> Filters
         </button>
       </div>
 
-      {/* ERROR MESSAGE DISPLAY */}
       {errorMsg && (
         <div style={{ padding: '20px', background: '#fee2e2', color: '#b91c1c', borderRadius: '8px', marginBottom: '20px' }}>
           <strong>Error:</strong> {errorMsg}
@@ -80,29 +90,63 @@ const Recommendations = () => {
           {colleges.length > 0 ? (
             colleges.map((col, index) => (
               <div key={index} className="college-card">
-                <div style={{ height: '150px', background: `url(${col.image}) center/cover no-repeat`, backgroundColor: '#cbd5e1', borderRadius: '12px 12px 0 0' }}></div>
+                <div
+                  style={{
+                    height: '150px',
+                    background: `url(${col.image}) center/cover no-repeat`,
+                    backgroundColor: '#cbd5e1',
+                    borderRadius: '12px 12px 0 0'
+                  }}
+                ></div>
+
                 <div style={{ padding: '1.5rem' }}>
                   <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
                     <span className="badge-blue">{col.specialization}</span>
-                    {col.isTopTier && <span className="badge-gold"><FaAward /> Top Tier</span>}
+                    {col.isTopTier && (
+                      <span className="badge-gold">
+                        <FaAward /> Top Tier
+                      </span>
+                    )}
                   </div>
-                  <h3 style={{ fontSize: '1.25rem', margin: '0 0 6px 0', color: '#1e293b' }}>{col.name}</h3>
-                  <div style={{ color: '#64748b', fontSize: '0.9rem' }}><FaGlobeAsia /> {col.country}</div>
-                  
+
+                  <h3 style={{ fontSize: '1.25rem', margin: '0 0 6px 0', color: '#1e293b' }}>
+                    {col.name}
+                  </h3>
+
+                  <div style={{ color: '#64748b', fontSize: '0.9rem' }}>
+                    <FaGlobeAsia /> {col.country}
+                  </div>
+
                   <div style={{ marginTop: '1.5rem', padding: '12px', background: '#f0fdf4', borderRadius: '8px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <span style={{ fontSize: '0.8rem', color: '#15803d' }}>Fees:</span>
-                      <strong style={{ color: '#166534' }}><FaMoneyBillWave /> ₹{col.liveFees}</strong>
+                      <strong style={{ color: '#166534' }}>
+                        <FaMoneyBillWave /> ₹{col.liveFees}
+                      </strong>
                     </div>
                   </div>
+
                   {/* Apply Button - Redirects to Official Website */}
-                <button 
-                className="view-btn" 
-                style={{ marginTop: '1rem' }}
-                onClick={() => window.open(col.website, '_blank')} // <--- THE MAGIC LINE
-                >
-                Visit Official Website
-                </button>
+                  <button
+                    className="view-btn"
+                    style={{ marginTop: '1rem' }}
+                    onClick={() => {
+                      const website =
+                        typeof col.website === 'string' && col.website.trim()
+                          ? col.website.trim().startsWith('http')
+                            ? col.website.trim()
+                            : `https://${col.website.trim()}`
+                          : null;
+
+                      if (website) {
+                        window.open(website, '_blank', 'noopener,noreferrer');
+                      } else {
+                        alert('Official website not available');
+                      }
+                    }}
+                  >
+                    Visit Official Website
+                  </button>
                 </div>
               </div>
             ))
