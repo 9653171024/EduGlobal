@@ -14,6 +14,14 @@ try {
   college_list = []; // Fallback empty array
 }
 
+let examsData = [];
+try {
+  examsData = require('./data/exams.json');
+  console.log(`✅ Loaded ${examsData.length} exams from JSON.`);
+} catch (e) {
+  console.error("⚠️ Error loading exams.json:", e.message);
+}
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -135,6 +143,15 @@ app.post('/api/colleges/recommend', async (req, res) => {
     console.error("❌ Server Error:", error.message);
     res.status(500).json({ message: "Server Error" });
   }
+});
+
+//exam section
+app.get('/api/exams', (req, res) => {
+  if (!examsData || examsData.length === 0) {
+    // Return empty array instead of crashing
+    return res.json([]); 
+  }
+  res.json(examsData);
 });
 
 // --- KEEP YOUR USER ROUTES ---

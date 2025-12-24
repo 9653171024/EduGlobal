@@ -522,7 +522,7 @@ a { text-decoration: none; color: inherit; }
 
 .student-life-btn:hover svg {
   transform: translateX(4px); /* Arrow moves right on hover */
-}
+=======
 .sidebar {
   background: #1e293b;
   color: #fff;
@@ -534,4 +534,5 @@ a { text-decoration: none; color: inherit; }
   transition: all 0.5s;
   overflow-x: hidden;
   white-space: nowrap;
+>>>>>>> db0160321feeb1479ce6d40ae3892aaa56a060be
 }
