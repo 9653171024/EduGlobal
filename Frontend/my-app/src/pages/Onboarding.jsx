@@ -36,12 +36,11 @@ const Onboarding = () => {
 
   const finishOnboarding = (finalSpec) => {
     
-
     // 1. Construct the final object manually to ensure latest data
     const finalData = {
       country: preferences.country,
       type: preferences.type,
-      specialization: finalSpec // Use the argument, not state (state is too slow)
+      specialization: finalSpec 
     };
 
     console.log("💾 SAVING TO DISK:", finalData);
@@ -50,19 +49,9 @@ const Onboarding = () => {
     if (!finalData.country || !finalData.type) {
       alert("Something went wrong. Please refresh and try again.");
       return;
-    setPreferences({ ...preferences, [field]: value });
-    setStep(step + 1);
-  };
-
-  const finishOnboarding = async () => {
-    try {
-      localStorage.setItem('userPreference', JSON.stringify(preferences));
-      toast.success('Profile setup complete!! Finding colleges...');
-      setTimeout(() => navigate('/recommendation'), 1500);
-    } catch (err) {
-      console.log(err);
     }
-  };
+
+    // --- FIX: Removed the garbage code that was causing syntax errors here ---
 
     // 3. Save to Local Storage
     localStorage.setItem('userPreferences', JSON.stringify(finalData));
@@ -78,6 +67,7 @@ const Onboarding = () => {
       navigate('/Recommendation');
     }, 100);
   };
+
   return (
     <>
       {/* ================= HERO SECTION ================= */}
@@ -146,34 +136,23 @@ const Onboarding = () => {
                 <div className="animation-fade-in">
                   <button
                     className="onboarding-btn"
-                    onClick={() => {
-                      
-                      finishOnboarding('CS');
-                    }}
+                    onClick={() => finishOnboarding('CS')}
                   >
                     <FaBookOpen /> Computer Science / IT
                   </button>
 
                   <button
                     className="onboarding-btn"
-                    onClick={() => {
-                      
-                      finishOnboarding('Medical');
-                      setPreferences({ ...preferences, specialization: 'Medical' });
-                      finishOnboarding();
-                    }}
+                    // FIX: Removed duplicate calls. Just pass the string.
+                    onClick={() => finishOnboarding('Medical')}
                   >
                     <FaUsers /> Medical
                   </button>
 
                   <button
                     className="onboarding-btn"
-                    onClick={() => {
-                      
-                      finishOnboarding('MBA');
-                      setPreferences({ ...preferences, specialization: 'MBA' });
-                      finishOnboarding();
-                    }}
+                    // FIX: Removed duplicate calls. Just pass the string.
+                    onClick={() => finishOnboarding('MBA')}
                   >
                     <FaBriefcase /> Management
                   </button>
