@@ -8,49 +8,31 @@ import Sidebar from "./components/Sidebar";
 // --- PAGES ---
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import Login from "./pages/login"; 
+import Login from "./pages/login";
 import Onboarding from "./pages/Onboarding";
 import Recommendations from "./pages/Recommendation";
-<<<<<<< HEAD
-import StudentLife from './pages/StudentLife';
-=======
+import StudentLife from "./pages/StudentLife";
 import EntranceExams from "./pages/Entrance";
 import Scholarships from "./pages/Scholarships";
->>>>>>> db0160321feeb1479ce6d40ae3892aaa56a060be
 
-
+// Layout wrapper
 const AppLayout = ({ children }) => {
   const location = useLocation();
-  
-  const publicPaths = ['/', '/register', '/login', '/onboarding'];
+
+  const publicPaths = ["/", "/register", "/login", "/onboarding"];
   const currentPath = location.pathname.toLowerCase();
 
   if (publicPaths.includes(currentPath)) {
     return <>{children}</>;
   }
 
-  return (
-    <Sidebar>
-      {children}
-    </Sidebar>
-  );
+  return <Sidebar>{children}</Sidebar>;
 };
 
 function App() {
   return (
     <Router>
-      
       <Navbar />
-<<<<<<< HEAD
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login/>}></Route>
-        <Route path="/Onboarding" element={<Onboarding/>}></Route>
-        <Route path="/Recommendation" element={<Recommendations/>}></Route>
-        <Route path="/student-life/:collegeName" element={<StudentLife />}></Route>
-      </Routes>
-=======
 
       <AppLayout>
         <Routes>
@@ -58,18 +40,18 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/Onboarding" element={<Onboarding />} />
+          <Route path="/onboarding" element={<Onboarding />} />
 
-          {/* Private / Sidebar Routes */}
-          <Route path="/Recommendation" element={<Recommendations />} />
+          {/* Main App Routes */}
+          <Route path="/recommendation" element={<Recommendations />} />
+          <Route path="/student-life/:collegeName" element={<StudentLife />} />
           <Route path="/entrance-exams" element={<EntranceExams />} />
           <Route path="/scholarships" element={<Scholarships />} />
-          
-          {/* Dashboard Redirect */}
+
+          {/* Fallback / Dashboard */}
           <Route path="/dashboard" element={<Recommendations />} />
         </Routes>
       </AppLayout>
->>>>>>> db0160321feeb1479ce6d40ae3892aaa56a060be
     </Router>
   );
 }
