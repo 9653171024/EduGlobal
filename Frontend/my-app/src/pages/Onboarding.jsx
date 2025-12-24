@@ -50,7 +50,19 @@ const Onboarding = () => {
     if (!finalData.country || !finalData.type) {
       alert("Something went wrong. Please refresh and try again.");
       return;
+    setPreferences({ ...preferences, [field]: value });
+    setStep(step + 1);
+  };
+
+  const finishOnboarding = async () => {
+    try {
+      localStorage.setItem('userPreference', JSON.stringify(preferences));
+      toast.success('Profile setup complete!! Finding colleges...');
+      setTimeout(() => navigate('/recommendation'), 1500);
+    } catch (err) {
+      console.log(err);
     }
+  };
 
     // 3. Save to Local Storage
     localStorage.setItem('userPreferences', JSON.stringify(finalData));
@@ -147,6 +159,8 @@ const Onboarding = () => {
                     onClick={() => {
                       
                       finishOnboarding('Medical');
+                      setPreferences({ ...preferences, specialization: 'Medical' });
+                      finishOnboarding();
                     }}
                   >
                     <FaUsers /> Medical
@@ -157,6 +171,8 @@ const Onboarding = () => {
                     onClick={() => {
                       
                       finishOnboarding('MBA');
+                      setPreferences({ ...preferences, specialization: 'MBA' });
+                      finishOnboarding();
                     }}
                   >
                     <FaBriefcase /> Management
