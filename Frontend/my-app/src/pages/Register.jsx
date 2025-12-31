@@ -58,7 +58,7 @@ const Register = () => {
         loanStatus: "Not Started"
       };
       localStorage.setItem('userInfo', JSON.stringify(userToSave));
-
+      
       setTimeout(() => navigate('/login'), 1500);
 
     } catch (err) {

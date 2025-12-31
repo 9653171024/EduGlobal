@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaGlobeAsia, FaMoneyBillWave, FaAward, FaFilter, FaExternalLinkAlt } from 'react-icons/fa';
+import Loader from './Loader';
 
 const Recommendations = () => {
   const navigate = useNavigate();
@@ -96,9 +97,7 @@ const Recommendations = () => {
       <div className="recommendations-grid">
         
         {loading ? (
-           <h3 style={{color: '#64748b', gridColumn: '1/-1', textAlign: 'center'}}>
-             🤖 AI is finding the best colleges for you...
-           </h3>
+           <Loader/>
         ) : colleges.length > 0 ? (
           colleges.map((col, index) => (
             <div key={index} className="college-card">
