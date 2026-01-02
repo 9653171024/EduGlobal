@@ -8,7 +8,10 @@
     "examDate": "Jan 2026",
     "website": "https://jeemain.nta.nic.in/",
     "logo": "/images/jee.png",
-    "tags": ["National", "Online"]
+    "tags": [
+      "National",
+      "Online"
+    ]
   },
   {
     "id": 2,
@@ -19,7 +22,10 @@
     "examDate": "May 2026",
     "website": "https://neet.nta.nic.in/",
     "logo": "/images/neet.jpg",
-    "tags": ["Medical", "Offline"]
+    "tags": [
+      "Medical",
+      "Offline"
+    ]
   },
   {
     "id": 3,
@@ -30,7 +36,10 @@
     "examDate": "Nov 2026",
     "website": "https://iimcat.ac.in/",
     "logo": "/images/cat.jpg",
-    "tags": ["MBA", "IIM"]
+    "tags": [
+      "MBA",
+      "IIM"
+    ]
   },
   {
     "id": 4,
@@ -41,7 +50,10 @@
     "examDate": "Feb 2026",
     "website": "https://gate.iitm.ac.in/",
     "logo": "/images/gate.jpg",
-    "tags": ["M.Tech", "PSU Jobs"]
+    "tags": [
+      "M.Tech",
+      "PSU Jobs"
+    ]
   },
   {
     "id": 5,
@@ -52,7 +64,10 @@
     "examDate": "Flexible",
     "website": "https://www.ets.org/gre",
     "logo": "/images/gre.jpg",
-    "tags": ["Global", "MS/MBA"]
+    "tags": [
+      "Global",
+      "MS/MBA"
+    ]
   },
   {
     "id": 6,
@@ -1168,6 +1183,26 @@
     "website": "https://www.collegeboard.org/",
     "logo": "/images/satsub.jpg",
     "tags": ["USA", "UG"]
+    "tags": [
+      "English",
+      "Visa"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "MHT CET 2025",
+    "organizer": "State Common Entrance Test Cell, Maharashtra",
+    "category": "Engineering & Pharmacy",
+    "deadline": "2025-03-15",
+    "examDate": "April 2025",
+    "website": "https://cetcell.mahacet.org/",
+    "logo": "/images/mhtcet.jpg",
+    "tags": [
+      "State",
+      "Offline",
+      "Engineering",
+      "Pharmacy"
+    ]
   }
 ]
 
