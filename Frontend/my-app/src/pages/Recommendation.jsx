@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FaGlobeAsia, FaMoneyBillWave, FaAward, FaFilter, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGlobeAsia, FaMoneyBillWave, FaAward, FaFilter, FaExternalLinkAlt ,FaMagic} from 'react-icons/fa';
 import Loader from './Loader';
 
 const Recommendations = () => {
@@ -149,24 +149,20 @@ const Recommendations = () => {
                 <button
                   className="visit-site-btn"
                   onClick={() => {
-                    const website = col.website && col.website.trim().startsWith('http') 
-                      ? col.website.trim() 
-                      : `https://${col.website?.trim()}`;
-                    
-                    if (col.website) window.open(website, '_blank', 'noopener,noreferrer');
-                    else alert('Official website link not available');
-                  }}
-                >
-                  Visit Website <FaExternalLinkAlt size={12} />
-                </button>
-                <button
-                className="student-life-btn"
-                onClick={() =>
-                  navigate(`/student-life/${encodeURIComponent(col.name)}`)
-                  }
-                >
-                Accommodations & Jobs
-                </button>
+                    const websiteUrl = col.website && col.website.trim().startsWith('http') 
+      ? col.website.trim() 
+      : `https://${col.website?.trim()}`;
+
+    if (col.website) {
+      // NAVIGATE TO ANALYZER with URL in State
+      navigate('/analyzer', { state: { targetUrl: websiteUrl } });
+    } else {
+      alert('Official website link not available for this college.');
+    }
+  }}
+>
+  <FaMagic style={{ marginRight: '5px' }} /> Analyze Official Site
+</button>
 
               </div>
             </div>

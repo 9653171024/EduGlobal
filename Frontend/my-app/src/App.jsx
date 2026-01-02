@@ -14,6 +14,9 @@ import Recommendations from "./pages/Recommendation";
 import StudentLife from "./pages/StudentLife";
 import EntranceExams from "./pages/Entrance";
 import Scholarships from "./pages/Scholarships";
+import Chatbot from "./components/Chatbot";
+import Tools from "./pages/Tools";
+import Analyzer from "./pages/Analyzer";
 
 // Layout wrapper
 const AppLayout = ({ children }) => {
@@ -47,11 +50,14 @@ function App() {
           <Route path="/student-life/:collegeName" element={<StudentLife />} />
           <Route path="/entrance-exams" element={<EntranceExams />} />
           <Route path="/scholarships" element={<Scholarships />} />
+          <Route path="/tools" element={<Tools/>}/>
+          <Route path="/analyzer" element={<Analyzer />} />
 
           {/* Fallback / Dashboard */}
           <Route path="/dashboard" element={<Recommendations />} />
         </Routes>
       </AppLayout>
+      <Chatbot/>
     </Router>
   );
 }

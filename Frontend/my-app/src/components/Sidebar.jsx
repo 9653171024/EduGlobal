@@ -7,7 +7,8 @@ import {
   FaPenNib, 
   FaMoneyCheckAlt, 
   FaHome,
-  FaUserGraduate 
+  FaUserGraduate ,
+  FaPassport
 } from 'react-icons/fa';
 import './Sidebar.css'; // We will create this CSS next
 
@@ -42,7 +43,10 @@ const Sidebar = ({ children }) => {
       path: "/reviews",
       name: "Alumni Reviews",
       icon: <FaUserGraduate />
-    }
+    },
+    { path: "/tools", 
+      name: "Tools & Visa", 
+      icon: <FaPassport /> }
   ];
 
   return (
